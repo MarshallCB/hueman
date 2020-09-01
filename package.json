@@ -1,0 +1,48 @@
+{
+  "version": "0.0.1",
+  "name": "hueman",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marshallcb/hueman.git"
+  },
+  "description": "Human color percpetion transforms",
+  "unpkg": "dist/index.min.js",
+  "module": "dist/index.mjs",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "author": {
+    "name": "Marshall Brandt",
+    "email": "hey@m4r.sh",
+    "url": "https://m4r.sh"
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">= 10"
+  },
+  "scripts": {
+    "build": "rollup -c",
+    "save": "captain to/save",
+    "prepublishOnly": "npm run build",
+    "test": "uvu -r esm test"
+  },
+  "keywords": [
+    "colors",
+    "hues",
+    "css",
+    "hsl",
+    "luminance",
+    "human",
+    "accessiblity"
+  ],
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "8.1.0",
+    "captain": "^0.2.4",
+    "esm": "^3.2.25",
+    "rollup": "2.21.0",
+    "rollup-plugin-terser": "6.1.0",
+    "shelljs": "^0.8.4",
+    "uvu": "0.0.19"
+  }
+}
