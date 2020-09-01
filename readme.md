@@ -49,9 +49,10 @@ import { mix, correction, hum } from 'https://cdn.skypack.dev/hueman';
 Returns the mixed hue between `hue1` and `hue2` at a desired ratio, where `ratio = 0` results in hue1, and `ratio = 1` results in `hue2`. Will correctly wrap across 0/360 (both 0 and 360 are red in HSL)
 
 ```js
-  console.log(100, 200, 0.5) // -> 150
-  console.log(340, 100, 0.1) // -> 352
-  console.log(0, 200, 0.75) // -> 150
+  import { mix } from 'hueman';
+  mix(100, 200, 0.5) // -> 150
+  mix(340, 100, 0.1) // -> 352
+  mix(0, 200, 0.75) // -> 150
 ```
 
 ### `correction(hue)`
@@ -60,9 +61,10 @@ Returns a value [0,1] that represents the corrective coefficient to equalize the
 WIP - formula bound to change (!)
 
 ```js
-  console.log(0) // "0.8" (red)
-  console.log(120) // "0.6" (green)
-  console.log(240) // "1.0" (blue)
+  import { correction } from 'hueman';
+  correction(0) // "0.8" (red)
+  correction(120) // "0.6" (green)
+  correction(240) // "1.0" (blue)
 ```
 
 ### `hum(h,s,l)`
@@ -70,7 +72,8 @@ WIP - formula bound to change (!)
 Returns a CSS string with corrected saturation and luminance values
 
 ```js
-  console.log(hum(120, 100, 50)) // -> "hsl(120, 80%, 40%)"
+  import { hum } from 'hueman';
+  hum(120, 100, 50) // -> "hsl(120, 80%, 40%)"
 ```
 
 ## Details
