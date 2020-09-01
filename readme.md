@@ -2,7 +2,8 @@
   <img src="https://github.com/marshallcb/hueman/raw/master/hueman.png" alt="hueman" width="100" />
 </div>
 
-<h1 align="center">Hueman</h1>
+<h1 align="center">Hueman (WIP)</h1>
+Under active development, come back soon!
 <div align="center">
   <a href="https://npmjs.org/package/hueman">
     <img src="https://badgen.now.sh/npm/v/hueman" alt="version" />
