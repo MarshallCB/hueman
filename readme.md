@@ -58,14 +58,14 @@ Returns the mixed hue between `hue1` and `hue2` at a desired ratio, where `ratio
 
 ### `correction(hue)`
 
-Returns a value [0,1] that represents the corrective coefficient to equalize the brightness based on the hue.
+Returns a `{ chroma, lightness }` correction coefficient compared to base hue (210)
 WIP - formula bound to change (!)
 
 ```js
   import { correction } from 'hueman';
-  correction(0) // "0.8" (red)
-  correction(120) // "0.6" (green)
-  correction(240) // "1.0" (blue)
+  correction(0) // { chroma: 0.66, lightness: 1.03 }
+  correction(120) // { chroma: 0.82, lightness: 0.64 }
+  correction(240) // { chroma: 0.82, lightness: 1.51 }
 ```
 
 ### `hum(h,s,l)`
@@ -73,8 +73,10 @@ WIP - formula bound to change (!)
 Returns a CSS string with corrected saturation and luminance values
 
 ```js
-  import { hum } from 'hueman';
-  hum(120, 100, 50) // -> "hsl(120, 80%, 40%)"
+  import { man } from 'hueman';
+  man(210, 100, 50) // -> "hsl(210, 100%, 50%)"
+  man(110, 100, 50) // -> "hsl(110, 83%, 32%)"
+  man(50, 100, 50) // -> "hsl(50, 98%, 31%)"
 ```
 
 ## Details

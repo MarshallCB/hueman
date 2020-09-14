@@ -1,6 +1,6 @@
 import { test } from 'uvu';
 import * as assert from 'uvu/assert';
-import { mix, correction, hum } from '../src';
+import { mix, correction, man } from '../src';
 
 test('Mix', () => {
   assert.is(mix(220, 240), 230)
