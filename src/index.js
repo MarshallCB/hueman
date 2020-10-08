@@ -111,7 +111,6 @@ export function man(h,s=0.5,l=0.5, a=1.0){
   l = fence(0, l, 1)
   let { chroma, lightness } = correction(h,s,l)
   let weight = Math.sqrt(s * (1 - Math.abs(0.5 - l) * 2))
-  console.log({ h, s, l, weight})
   let hue = h
   let sat = fence(0,rawmix(s* 100, s * 100 * chroma, weight),100)
   let lit = fence(0,rawmix(l* 100, l * 100 * lightness, weight ),100)
