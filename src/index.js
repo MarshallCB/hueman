@@ -26,13 +26,13 @@ let scores = [
   },
   {
     hue: 45,
-    chroma: 46,
-    lightness: 81
+    chroma: 30, // originally 46
+    lightness: 81 // originally 81
   },
   {
     hue: 75,
     chroma: 51,
-    lightness: 93
+    lightness: 85 // originally 93
   },
   {
     hue: 105,
@@ -42,7 +42,7 @@ let scores = [
   {
     hue: 135,
     chroma: 59,
-    lightness: 87
+    lightness: 80 // originally 87
   },
   {
     hue: 165,
@@ -57,12 +57,12 @@ let scores = [
   {
     hue: 225,
     chroma: 60,
-    lightness: 39
+    lightness: 49 // originally 39
   },
   {
     hue: 255,
     chroma: 60,
-    lightness: 35
+    lightness: 45 // originally 35
   },
   {
     hue: 285,
@@ -98,8 +98,8 @@ export function correction(hue){
     hue: (left.hue * l + right.hue * r)
   }
   // using 210 hue as base (where 49 and 56 come from)
-  let chromaCoef = Math.sqrt(49 / position.chroma)
-  let lightnessCoef = Math.sqrt(56 / position.lightness)
+  let chromaCoef = Math.pow(49 / position.chroma, 1)
+  let lightnessCoef = Math.pow(56 / position.lightness, 1)
   return { 
     chroma: fix(chromaCoef),
     lightness: fix(lightnessCoef)
@@ -110,9 +110,10 @@ export function man(h,s=0.5,l=0.5, a=1.0){
   s = fence(0, s, 1)
   l = fence(0, l, 1)
   let { chroma, lightness } = correction(h,s,l)
-  let weight = 1 - (Math.abs(1.0 - s) * (1 - Math.abs(0.5 - l) * 2))
+  let weight = Math.sqrt(s * (1 - Math.abs(0.5 - l) * 2))
+  console.log({ h, s, l, weight})
   let hue = h
-  let sat = fence(0,rawmix(s* 100, s * 100 * chroma , weight),100)
+  let sat = fence(0,rawmix(s* 100, s * 100 * chroma, weight),100)
   let lit = fence(0,rawmix(l* 100, l * 100 * lightness, weight ),100)
   let alpha = a
   return `hsla(${hue}, ${fix(sat)}%, ${fix(lit)}%, ${fix(alpha)})`
