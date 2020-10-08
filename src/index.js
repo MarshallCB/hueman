@@ -98,8 +98,8 @@ export function correction(hue){
     hue: (left.hue * l + right.hue * r)
   }
   // using 210 hue as base (where 49 and 56 come from)
-  let chromaCoef = 49 / position.chroma
-  let lightnessCoef = 56 / position.lightness
+  let chromaCoef = Math.sqrt(49 / position.chroma)
+  let lightnessCoef = Math.sqrt(56 / position.lightness)
   return { 
     chroma: fix(chromaCoef),
     lightness: fix(lightnessCoef)
