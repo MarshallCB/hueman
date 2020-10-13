@@ -29,22 +29,49 @@ Via NPM:
 npm install hueman
 ```
 
+NodeJS
+```js
+// CJS syntax
+var { hueman, mix, correction } = require('hueman');
+
+// ES6 Syntax
+import { hueman, mix, correction } from 'hueman';
+```
+
 Script tag (via unpkg):
 ```html
 <!-- Available as global variable hueman -->
 <script src="https://unpkg.com/hueman"></script>
 <!-- Later -->
 <script>
-  console.log(hueman.man(120,1.0,0.5)); // "hsl(120,97%,37.5%)"
+  console.log(hueman(120,1.0,0.5)); // "hsl(120,97%,37.5%)"
+  console.log(hueman.mix(120,160,0.75)); // "150"
+  console.log(hueman.correction(120)); // "[0.97, 0.75]"
 </script>
 ```
 
-Browser Module (via snowpack):
+Browser: Module (via snowpack):
 ```js
-import { mix, correction, hum } from 'https://cdn.skypack.dev/hueman';
-// OR import hueman from 'https://cdn.skypack.dev/hueman'
+import { hueman, mix, correction } from 'https://cdn.skypack.dev/hueman';
 ```
+
 ## API
+
+
+### `hueman(h,s,l,a)`
+
+- `h: [0,360]` (values will automatically wrap if outside of this range)
+- `s: [0.0,1.0]` (defaults to 1.0)
+- `l: [0.0,1.0]` (defaults to 0.5)
+- `a: [0.0,1.0]` (defaults to 1.0)
+
+```js
+  import { hueman } from 'hueman';
+  hueman(210, 100, 50) // -> "hsl(210,100%,50%)"
+  hueman(110, 100, 50, 0.5) // -> "hsla(110,97%,37.5%,0.5)"
+  hueman(50, 100, 50) // -> "hsl(50,100%,37.5%)"
+```
+
 
 ### `mix(hue1,hue2,ratio)`
 
@@ -68,20 +95,6 @@ Returns `[chroma, lightness]` correction coefficient compared to base hue (210).
   correction(120) // [0.97, 0.75] (slightly reduce chroma, reduce lightness)
   correction(240) // [0.97, 1.27]
   correction(240,0.2,0.2) // [ 0.9976, 1.0216 ] (reduced effect since hue is less vibrant)
-```
-
-### `man(h,s,l,a)`
-
-- `h: [0,360]` (values will automatically wrap if outside of this range)
-- `s: [0.0,1.0]` (defaults to 1.0)
-- `l: [0.0,1.0]` (defaults to 0.5)
-- `a: [0.0,1.0]` (defaults to 1.0)
-
-```js
-  import { man } from 'hueman';
-  man(210, 100, 50) // -> "hsl(210,100%,50%)"
-  man(110, 100, 50, 0.5) // -> "hsla(110,97%,37.5%,0.5)"
-  man(50, 100, 50) // -> "hsl(50,100%,37.5%)"
 ```
 
 # Development

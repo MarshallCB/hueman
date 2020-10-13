@@ -2,7 +2,7 @@ import resolve from '@rollup/plugin-node-resolve';
 import { terser } from 'rollup-plugin-terser';
 import pkg from './package.json';
 
-export default {
+export default [{
 	input: 'src/index.js',
 	output: [{
 		format: 'esm',
@@ -12,22 +12,6 @@ export default {
 		format: 'cjs',
 		file: pkg.main,
 		sourcemap: false,
-	}, {
-		name: pkg['umd:name'] || pkg.name,
-		format: 'umd',
-		file: pkg.unpkg,
-		sourcemap: false,
-		plugins: [
-			terser()
-		]
-	}, {
-		name: pkg['umd:name'] || pkg.name,
-		format: 'umd',
-		file: "min.js",
-		sourcemap: false,
-		plugins: [
-			terser()
-		]
 	}, {
 		format: 'esm',
 		file: "es.js",
@@ -44,4 +28,31 @@ export default {
 	plugins: [
 		resolve()
 	]
-}
+},{
+	input: 'src/index-umd.js',
+	output: [{
+		name: pkg['umd:name'] || pkg.name,
+		format: 'umd',
+		file: pkg.unpkg,
+		sourcemap: false,
+		plugins: [
+			terser()
+		]
+	}, {
+		name: pkg['umd:name'] || pkg.name,
+		format: 'umd',
+		file: "min.js",
+		sourcemap: false,
+		plugins: [
+			terser()
+		]
+	}],
+	external: {
+		...require('module').builtinModules,
+		...Object.keys(pkg.dependencies || {}),
+		...Object.keys(pkg.peerDependencies || {}),
+	},
+	plugins: [
+		resolve()
+	]
+}]

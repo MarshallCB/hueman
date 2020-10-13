@@ -3,7 +3,7 @@ let rawmix = (x, y, ratio=0.5) => x * (1-ratio) + y * ratio
 let fence = (x,min=0,max=1) => Math.max(Math.min(max,x),min)
 let correct_hue=(h)=>Math.round(h+360)%360
 
-export function mix(x, y, ratio = 0.5){
+function mix(x, y, ratio = 0.5){
   x = correct_hue(x)
   y = correct_hue(y)
   if(Math.abs(x - y) >= 180){
@@ -23,7 +23,7 @@ let chroma_scores = [90,91,94,99,103,104,102,102,100,99,98,97,97,97,99,102,106,1
 let lightness_scores = [100,99,94,88,82,75,70,71,72,73,74,75,75,75,74,74,74,73,73,80,89,100,112,123,127,126,121,114,107,100,94,96,98,99,100,100]
 
 // Correction values to multiply chroma / lightness by based on hue
-export function correction(h,s=1,l=0.5,pow=1.0){
+function correction(h,s=1,l=0.5,pow=1.0){
   h = correct_hue(h)
   let p = h / 10
   let lR = p - Math.floor(p); // decimal distance from Math.floor (ratio of value in left array position)
@@ -38,7 +38,7 @@ export function correction(h,s=1,l=0.5,pow=1.0){
     fix(rawmix(1,Math.pow(lightness,pow), weight), 4)
   ]
 }
-export function man(h,s=0.5,l=0.5, a=1.0,pow=1.0){
+function hueman(h,s=0.5,l=0.5, a=1.0,pow=1.0){
   // correct inputs
   h = correct_hue(h)
   s = fence(s)
@@ -51,3 +51,8 @@ export function man(h,s=0.5,l=0.5, a=1.0,pow=1.0){
   l = fence(l*100*lightness,0,100)
   return a===1 ? `hsl(${h},${fix(s)}%,${fix(l)}%)` : `hsla(${h},${fix(s)}%,${fix(l)}%,${fix(a,3)})`
 }
+
+let total = hueman.bind({});
+Object.assign(total, { correction, mix })
+export default total;
+export { hueman, mix, correction };

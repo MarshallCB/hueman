@@ -42,7 +42,7 @@ function correction(h,s=1,l=0.5,pow=1.0){
     fix(rawmix(1,Math.pow(lightness,pow), weight), 4)
   ]
 }
-function man(h,s=0.5,l=0.5, a=1.0,pow=1.0){
+function hueman(h,s=0.5,l=0.5, a=1.0,pow=1.0){
   // correct inputs
   h = correct_hue(h);
   s = fence(s);
@@ -56,6 +56,10 @@ function man(h,s=0.5,l=0.5, a=1.0,pow=1.0){
   return a===1 ? `hsl(${h},${fix(s)}%,${fix(l)}%)` : `hsla(${h},${fix(s)}%,${fix(l)}%,${fix(a,3)})`
 }
 
+let total = hueman.bind({});
+Object.assign(total, { correction, mix });
+
 exports.correction = correction;
-exports.man = man;
+exports.default = total;
+exports.hueman = hueman;
 exports.mix = mix;
