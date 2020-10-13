@@ -18,7 +18,7 @@
 - Brightness / Saturation calibration across hues
 - Find intermediate hues (good for programmatic gradients)
 - Works on both server and client
-- Pairs well with (`themepark`)['https://github.com/MarshallCB/themepark']
+- Pairs well with (`themepark`)[https://github.com/MarshallCB/themepark]
 
 # Usage
 

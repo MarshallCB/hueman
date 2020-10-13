@@ -23,8 +23,7 @@
     "node": ">= 10"
   },
   "scripts": {
-    "build": "rollup -c",
-    "test": "npm run build && routo test/source test/public -w & serve test/public"
+    "build": "rollup -c"
   },
   "keywords": [
     "colors",
@@ -37,11 +36,7 @@
   ],
   "devDependencies": {
     "@rollup/plugin-node-resolve": "8.1.0",
-    "esm": "^3.2.25",
     "rollup": "2.21.0",
-    "rollup-plugin-terser": "6.1.0",
-    "routo": "^0.4.1",
-    "serve": "^11.3.2",
-    "ucontent": "^2.0.0"
+    "rollup-plugin-terser": "6.1.0"
   }
 }
