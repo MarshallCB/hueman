@@ -28,6 +28,13 @@ export default {
 		plugins: [
 			terser()
 		]
+	}, {
+		format: 'esm',
+		file: "es.js",
+		sourcemap: false,
+		plugins: [
+			terser()
+		]
 	}],
 	external: {
 		...require('module').builtinModules,
