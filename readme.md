@@ -2,8 +2,7 @@
   <img src="https://github.com/marshallcb/hueman/raw/master/hueman.png" alt="hueman" width="100" />
 </div>
 
-<h1 align="center">Hueman (WIP)</h1>
-Under active development, come back soon!
+<h1 align="center">hueman</h1>
 <div align="center">
   <a href="https://npmjs.org/package/hueman">
     <img src="https://badgen.now.sh/npm/v/hueman" alt="version" />
@@ -13,19 +12,17 @@ Under active development, come back soon!
   </a>
 </div>
 
-<div align="center">Human color percpetion transforms</div>
+<div align="center">Color space based on human perception</div>
 
 ## Features
 - Brightness / Saturation calibration across hues
-- Find intermediate hues (good for gradients)
+- Find intermediate hues (good for programmatic gradients)
 - Works on both server and client
-- Calculate accessibility of color pairings
+- Pairs well with (`themepark`)['https://github.com/MarshallCB/themepark']
 
 # Usage
 
 ## Installation
-
-Guided tutorial on path.cafe (coming soon)
 
 Via NPM:
 ```sh
@@ -35,13 +32,17 @@ npm install hueman
 Script tag (via unpkg):
 ```html
 <!-- Available as global variable hueman -->
-<script src="https://unpkg.com/hueman" />
+<script src="https://unpkg.com/hueman"></script>
+<!-- Later -->
+<script>
+  console.log(hueman.man(120,1.0,0.5)); // "hsl(120,97%,37.5%)"
+</script>
 ```
 
 Browser Module (via snowpack):
 ```js
-// OR import hueman from 'https://cdn.skypack.dev/hueman'
 import { mix, correction, hum } from 'https://cdn.skypack.dev/hueman';
+// OR import hueman from 'https://cdn.skypack.dev/hueman'
 ```
 ## API
 
@@ -53,63 +54,39 @@ Returns the mixed hue between `hue1` and `hue2` at a desired ratio, where `ratio
   import { mix } from 'hueman';
   mix(100, 200, 0.5) // -> 150
   mix(340, 100, 0.1) // -> 352
-  mix(0, 200, 0.75) // -> 150
+  mix(0, 200, 0.75) // -> 240 (closer distance between 200 and 360 than 0 and 200)
 ```
 
 ### `correction(hue)`
 
-Returns a `{ chroma, lightness }` correction coefficient compared to base hue (210)
-WIP - formula bound to change (!)
+Returns `[chroma, lightness]` correction coefficient compared to base hue (210). Useful for calculating opacity for transparent overlays and other indirect hue-influenced calculations.
 
 ```js
   import { correction } from 'hueman';
-  correction(0) // { chroma: 0.66, lightness: 1.03 }
-  correction(120) // { chroma: 0.82, lightness: 0.64 }
-  correction(240) // { chroma: 0.82, lightness: 1.51 }
+  // correction(h,s,l) => [chroma, lightness]
+  correction(0) // [0.9, 1] (reduce chroma, don't alter lightness)
+  correction(120) // [0.97, 0.75] (slightly reduce chroma, reduce lightness)
+  correction(240) // [0.97, 1.27]
+  correction(240,0.2,0.2) // [ 0.9976, 1.0216 ] (reduced effect since hue is less vibrant)
 ```
 
-### `hum(h,s,l)`
+### `man(h,s,l,a)`
 
-Returns a CSS string with corrected saturation and luminance values
+- `h: [0,360]` (values will automatically wrap if outside of this range)
+- `s: [0.0,1.0]` (defaults to 1.0)
+- `l: [0.0,1.0]` (defaults to 0.5)
+- `a: [0.0,1.0]` (defaults to 1.0)
 
 ```js
   import { man } from 'hueman';
-  man(210, 100, 50) // -> "hsl(210, 100%, 50%)"
-  man(110, 100, 50) // -> "hsl(110, 83%, 32%)"
-  man(50, 100, 50) // -> "hsl(50, 98%, 31%)"
+  man(210, 100, 50) // -> "hsl(210,100%,50%)"
+  man(110, 100, 50, 0.5) // -> "hsla(110,97%,37.5%,0.5)"
+  man(50, 100, 50) // -> "hsl(50,100%,37.5%)"
 ```
-
-## Details
-
-<details>
-  <summary><strong>HSL based themes</strong></summary>
-  <div>
-    Coming soon
-  </div>
-</details>
-<details>
-  <summary><strong>Luminance Calculations</strong></summary>
-  <div>
-    Coming soon
-  </div>
-</details>
-
-- - -
 
 # Development
 
-### Contributing Guidelines
-
-### Commands
-
-Guided process to commit changes and/or submit a pull request
-```sh
-npm run save
-```
-
 ### Roadmap
-- Accessibility contrast guarantees with automated browser testing
-- Alternate formulations
 - Webapp color generator
 - Examples & Tutorials
 

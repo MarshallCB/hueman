@@ -1,4 +1,4 @@
-let fix = (n) => +n.toFixed(1)
+let fix = (n,x=1) => +n.toFixed(x)
 let rawmix = (x, y, ratio) => x * (1-ratio) + y * ratio
 let fence = (min,x,max) => Math.max(Math.min(max,x),min)
 let correct_hue=h=>Math.round(h+360)%360
@@ -34,8 +34,8 @@ export function correction(h,s=1,l=0.5,pow=1.0){
   let chroma = (chroma_scores[left] * rR + chroma_scores[right] * lR) / 100
   let lightness = (lightness_scores[left] * rR + lightness_scores[right] * lR) / 100
   return [
-    rawmix(1,Math.pow(chroma,pow), weight),
-    rawmix(1,Math.pow(lightness,pow), weight)
+    fix(rawmix(1,Math.pow(chroma,pow), weight), 4),
+    fix(rawmix(1,Math.pow(lightness,pow), weight), 4)
   ]
 }
 export function man(h,s=0.5,l=0.5, a=1.0,pow=1.0){
@@ -49,5 +49,5 @@ export function man(h,s=0.5,l=0.5, a=1.0,pow=1.0){
   // Apply coefficients and convert [0,1] -> [0%,100%]
   s = fence(0,s*100*chroma,100)
   l = fence(0,l*100*lightness,100)
-  return `hsla(${h}, ${fix(s)}%, ${fix(l)}%, ${fix(a)})`
+  return a===1 ? `hsl(${h},${fix(s)}%,${fix(l)}%)` : `hsla(${h},${fix(s)}%,${fix(l)}%,${fix(a,3)})`
 }
