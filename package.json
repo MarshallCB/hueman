@@ -19,6 +19,7 @@
     "dist",
     "types"
   ],
+  "types": "types/index.d.ts",
   "engines": {
     "node": ">= 10"
   },
