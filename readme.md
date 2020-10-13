@@ -18,7 +18,7 @@
 - Brightness / Saturation calibration across hues
 - Find intermediate hues (good for programmatic gradients)
 - Works on both server and client
-- Pairs well with (`themepark`)[https://github.com/MarshallCB/themepark]
+- Pairs well with [`themepark`](https://github.com/MarshallCB/themepark)
 
 # Usage
 
@@ -87,8 +87,10 @@ Returns `[chroma, lightness]` correction coefficient compared to base hue (210).
 # Development
 
 ### Roadmap
-- Webapp color generator
-- Examples & Tutorials
+- Color generator webapp
+- Examples + Explanations in readme
+- Reduced import size (encode hue biases more efficiently)
+- Add luminance / chroma testing for formula refinements
 
 ## Acknowledgements
 - [HSLuv](https://www.hsluv.org/comparison/)
