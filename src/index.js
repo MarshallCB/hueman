@@ -1,9 +1,9 @@
 let fix = (n,x=1) => +n.toFixed(x)
 let rawmix = (x, y, ratio=0.5) => x * (1-ratio) + y * ratio
 let fence = (x) => Math.max(Math.min(1,x),0)
-let correct_hue=(h,w=360)=>Math.round(h+w)%w
+let correct_hue=(h)=>Math.round(h+360)%360
 
-function mix(x, y, ratio = 0.5){
+let mix = (x, y, ratio = 0.5)=>{
   x = correct_hue(x)
   y = correct_hue(y)
   if(Math.abs(x - y) >= 180){
@@ -27,7 +27,12 @@ let scores = [
   [100,99,94,88,82,75,70,71,72,73,74,75,75,75,74,74,74,73,73,80,89,100,112,123,127,126,121,114,107,100,94,96,98,99,100,100]
 ]
 
-function est(arr, p,x){
+// let scores = [
+//   [90,94,103,102,100,98,97,99,106,111,105,97,97,97,97,97,98,93],
+//   [100,94,82,70,72,74,75,74,74,73,89,112,127,121,107,94,98,100]
+// ]
+
+let est = (arr,p,x)=>{
   x=Math.floor(p)
   return rawmix(arr[x], arr[(x+1)%arr.length], p-x)
 }
@@ -36,18 +41,8 @@ function est(arr, p,x){
 let correction = (h,s=1,l=0.5) => scores.map(scoreArray => 
   fix(rawmix(1,est(scoreArray, correct_hue(h) / 10) / 100,s * (1 - Math.abs(0.5 - l) * 2)), 4)
 )
-// function correction(h,s=1,l=0.5){
-//   // h = correct_hue(h)
-//   // let p = h / 10
-//   // let weight = s * (1 - Math.abs(0.5 - l) * 2)
-//   // let chroma = est(chroma_scores, p) / 100
-//   // let lightness = est(lightness_scores, p) / 100
-//   // return [
-//   //   fix(rawmix(1,chroma,weight), 4),
-//   //   fix(rawmix(1,lightness,weight), 4)
-//   // ]
-// }
-function hueman(h,s=0.5,l=0.5, a=1.0){
+
+function hueman (h,s=0.5,l=0.5, a=1.0,mid){
   // correct inputs
   h = correct_hue(h)
   s = fence(s)
@@ -56,7 +51,7 @@ function hueman(h,s=0.5,l=0.5, a=1.0){
   // calculate correction coefficients
   let [chroma, lightness] = correction(h,s,l)
   // Apply coefficients and convert [0,1] -> [0%,100%]
-  let mid=`${h},${fix(fence(s*chroma)*100)}%,${fix(fence(l*lightness)*100)}%`
+  mid=`${h},${fix(fence(s*chroma)*100)}%,${fix(fence(l*lightness)*100)}%`
   return a===1 ? `hsl(${mid})` : `hsla(${mid},${fix(a,3)})`
 }
 
