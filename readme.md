@@ -8,7 +8,7 @@
     <img src="https://badgen.now.sh/npm/v/hueman" alt="version" />
   </a>
   <a href="https://bundlephobia.com/result?p=hueman">
-    <img src="https://img.badgesize.io/MarshallCB/hueman/master/min.js?compression=brotli" alt="install size" />
+    <img src="https://img.badgesize.io/MarshallCB/hueman/master/es.js?compression=brotli" alt="install size" />
   </a>
 </div>
 
