@@ -67,9 +67,9 @@ import { hueman, mix, correction } from 'https://cdn.skypack.dev/hueman';
 
 ```js
   import { hueman } from 'hueman';
-  hueman(210, 100, 50) // -> "hsl(210,100%,50%)"
-  hueman(110, 100, 50, 0.5) // -> "hsla(110,97%,37.5%,0.5)"
-  hueman(50, 100, 50) // -> "hsl(50,100%,37.5%)"
+  hueman(210, 1.0, 0.5) // -> "hsl(210,100%,50%)"
+  hueman(110, 1.0, 0.5, 0.5) // -> "hsla(110,97%,37.5%,0.5)"
+  hueman(50, 1.0, 0.5) // -> "hsl(50,100%,37.5%)"
 ```
 
 
