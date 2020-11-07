@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://github.com/marshallcb/hueman/raw/master/hueman.png" alt="hueman" width="100" />
+  <img src="https://github.com/marshallcb/hueman/raw/main/hueman.png" alt="hueman" width="100" />
 </div>
 
 <h1 align="center">hueman</h1>
@@ -8,7 +8,7 @@
     <img src="https://badgen.now.sh/npm/v/hueman" alt="version" />
   </a>
   <a href="https://bundlephobia.com/result?p=hueman">
-    <img src="https://img.badgesize.io/MarshallCB/hueman/master/es.js?compression=brotli" alt="install size" />
+    <img src="https://img.badgesize.io/MarshallCB/hueman/main/es.js?compression=brotli" alt="install size" />
   </a>
 </div>
 

@@ -55,6 +55,7 @@ function hueman (h,s=0.5,l=0.5, a=1.0,mid){
   // calculate correction coefficients
   let [chroma, lightness] = correction(h,s,l);
   // Apply coefficients and convert [0,1] -> [0%,100%]
+  
   mid=`${h},${fix(fence(s*chroma)*100)}%,${fix(fence(l*lightness)*100)}%`;
   return a===1 ? `hsl(${mid})` : `hsla(${mid},${fix(a,3)})`
 }
