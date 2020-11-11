@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://github.com/marshallcb/hueman/raw/main/hueman.png" alt="hueman" width="100" />
+  <img src="https://github.com/marshallcb/hueman/raw/main/docs/hueman.png" alt="hueman" width="100" />
 </div>
 
 <h1 align="center">hueman</h1>
