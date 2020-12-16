@@ -30,9 +30,16 @@ let est = (arr,p,x)=>{
 }
 
 // Correction values to multiply chroma / lightness by based on hue
-let correction = (h,s=1,l=0.5) => scores.map(scoreArray => 
-  fix(rawmix(1,est(scoreArray, correct_hue(h) / 10) / 100,s * (1 - Math.abs(0.5 - l) * 2)), 4)
-)
+// let correction = (h,s=1,l=0.5) => scores.map(scoreArray => 
+//   fix(rawmix(1,est(scoreArray, correct_hue(h) / 10) / 100,s * (1 - Math.abs(0.5 - l) * 2)), 4)
+// )
+
+let correction = (h,s=1,l=0.5) => scores.map(scoreArray => {
+  let ratio = s * (1 - Math.abs(0.5 - l) * 2)
+  let offset = est(scoreArray, correct_hue(h) / 10) / 100
+  let x = rawmix(1,offset, ratio)
+  return fix(x,4)
+})
 
 function hueman (h,s=0.5,l=0.5, a=1.0,mid){
   // correct inputs
